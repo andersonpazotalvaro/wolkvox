@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+group = 'co.smart.procesador'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation project(':comun:comun-dominio')
+	implementation project.ext.springstarterweb
+	 //implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation project.ext.springdevtools
+	//implementation "org.springframework.boot:spring-boot-devtools"
+	compileOnly project.ext.lombok
+	annotationProcessor project.ext.lombok
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.1'
+	implementation group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
+	testImplementation project.ext.springstarterweb
+	testImplementation project.ext.mockitocore
+	//testImplementation project.ext.mockitoinline
+	testImplementation project.ext.junitjupiterapi
+	testRuntimeOnly project.ext.junitjupiterengine
+
+	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.2.0'
+	implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
+	implementation project.ext.gson
+}
+
+test {
+	useJUnitPlatform()
+}
+bootJar{
+	enabled= false
+}

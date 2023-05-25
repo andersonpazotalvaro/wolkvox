@@ -1,0 +1,47 @@
+server:
+  port: 8084
+
+socket:
+  setSoTimeout(10*10000):
+
+spring:
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wolkvox?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: T3cn0l0g1@
+    dialect: org.hibernate.dialect.MySQL8Dialect
+
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  mail:
+
+    host: smtp.gmail.com
+    port: 587
+    protocol: smtp
+    username: notificacionesti@ccoa.org.co
+    password: 1z2x3c4v5b*
+    properties:
+      mail:
+        smtp:
+          ssl:
+            protocols: TLSv1.2
+
+          auth: true
+          starttls:
+            enable: true
+
+
+cron:
+  midnight: midnight
+  expression: 0 5 0 * * *
+  expressions: 0 5 1 * * MON
+  prueba: 0 2 14 * * *

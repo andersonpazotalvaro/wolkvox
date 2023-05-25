@@ -1,0 +1,9 @@
+allprojects{
+	repositories {
+		mavenCentral()
+
+	}
+
+	//Lombok
+	project.ext.lombok = [ 'org.projectlombok:lombok:1.18.20' ]
+}

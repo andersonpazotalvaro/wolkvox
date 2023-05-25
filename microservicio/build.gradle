@@ -1,0 +1,87 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+
+	//spring
+	project.ext.springdevtools=["org.springframework.boot:spring-boot-devtools:${springBootVersion}"]
+
+	//spring starter
+	project.ext.springstarterweb=["org.springframework.boot:spring-boot-starter-web:${springBootVersion}"]
+
+	// Spring Test
+	project.ext.springstartertest = ["org.springframework.boot:spring-boot-starter-test:${springBootVersion}"]
+
+	//JPA
+	project.ext.springbootjpa = ["org.springframework.data:spring-data-jpa"] // :${springBootVersion}
+
+	//Database 'org.postgresql:postgresql:42.3.3'
+	//project.ext.db = [ 'org.postgresql:postgresql'  ] // :42.3.3
+
+	//Database 'mysql:mysql-connector-java'
+	project.ext.db = [ 'mysql:mysql-connector-java'  ]
+
+
+
+
+
+	//Lombok
+	project.ext.lombok = [ 'org.projectlombok:lombok:1.18.20' ]
+
+	// Mockito
+	project.ext.mockitocore = ['org.mockito:mockito-core:4.8.0']
+	project.ext.mockitoinline = ['org.mockito:mockito-inline:4.8.0']
+	project.ext.junitjupiterapi = ['org.junit.jupiter:junit-jupiter-api:5.8.1']
+	project.ext.junitjupiterengine = ['org.junit.jupiter:junit-jupiter-engine:5.8.1']
+
+	// Security
+	//project.ext.springsecurity = [ 'org.springframework.boot:spring-boot-starter-security']
+		// JWT
+	project.ext.jwt = [  'io.jsonwebtoken:jjwt:0.9.1' ]
+
+	// AMQP
+	project.ext.springamqp = [ 'org.springframework.boot:spring-boot-starter-amqp' ]
+		// Json
+	project.ext.gson = [ 'com.google.code.gson:gson:2.9.1' ]
+
+
+	// Se excluye JUnit 4
+	configurations {
+		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+
+}
+
+group = 'co.smart.procesador'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation project.ext.springstarterweb
+	implementation project(':infraestructura')
+	implementation project.ext.springbootjpa
+	runtimeOnly project.ext.db
+	runtimeOnly project.ext.springdevtools
+
+}
+
+springBoot {
+	mainClass='co.smart.procesador.MicroservicioApplication'
+	buildInfo {
+		properties{
+			name="procesador"
+			version= version
+		}
+	}
+}
